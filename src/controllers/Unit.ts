@@ -2,16 +2,20 @@ import { Request, Response } from "express";
 import { Unit, IUnit } from "../database/Unit";
 import { Company } from "../database/Company";
 import { Asset } from "../database/Asset";
+import { isValidObjectId } from "mongoose";
 
 const UnitController = {
   async index(req: Request, res: Response): Promise<Response> {
-    let units = await Unit.find().populate("assets").populate("company");
+    const units = await Unit.find().populate("assets").populate("company");
     return res.json(units);
   },
 
   async findById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    let unit = await Unit.findById(id).populate("assets").populate("company");
+    if (!isValidObjectId(id)){
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
+    const unit = await Unit.findById(id).populate("assets").populate("company");
     return res.json(unit);
   },
 
@@ -41,7 +45,9 @@ const UnitController = {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-
+    if (!isValidObjectId(id)){
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await Unit.findByIdAndUpdate(id, req.body, { new: true })
       .then((data) => {
         return res.status(200).json(data);
@@ -55,6 +61,9 @@ const UnitController = {
   async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
+    if (!isValidObjectId(id)){
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await Unit.findByIdAndDelete(id)
       .then(async (data) => {
         if (!data) {

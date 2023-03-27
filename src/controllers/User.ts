@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { IUser, User } from "../database/User";
 import { Company } from "../database/Company";
+import { isValidObjectId } from "mongoose";
 
 const UserController = {
   async index(req: Request, res: Response): Promise<Response> {
@@ -10,6 +11,9 @@ const UserController = {
 
   async findById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     const user = await User.findById(id).populate("company");
     return res.json(user);
   },
@@ -40,7 +44,9 @@ const UserController = {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await User.findByIdAndUpdate(id, req.body, {
       new: true,
     })
@@ -55,9 +61,11 @@ const UserController = {
 
   async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await User.findByIdAndDelete(id)
-      .then((data) => {
+      .then(() => {
         return res
           .status(200)
           .json({ message: `User ${id} successfully deleted!` });

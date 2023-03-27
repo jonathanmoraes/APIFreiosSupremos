@@ -1,15 +1,19 @@
-import { json, Request, Response } from "express";
+import { Request, Response } from "express";
+import { isValidObjectId } from "mongoose";
 import { Company, ICompany } from "../database/Company";
 
 const CompanyController = {
   async index(req: Request, res: Response): Promise<Response> {
-    let companies = await Company.find().populate("users").populate("unit");
+    const companies = await Company.find().populate("users").populate("unit");
     return res.status(200).json(companies);
   },
 
   async findById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-    let company = await Company.findById(id).populate("users").populate("unit");
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
+    const company = await Company.findById(id).populate("users").populate("unit");
     if (!company) {
       return res.status(404).json({ message: "Company not found" });
     }
@@ -35,7 +39,9 @@ const CompanyController = {
 
   async update(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
-
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await Company.findByIdAndUpdate(id, req.body, {
       new: true,
     })
@@ -50,8 +56,11 @@ const CompanyController = {
 
   async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
+    if (!isValidObjectId(id)) {
+      return res.status(404).json({ message: "Id is not valid ObjectId" });
+    }
     await Company.findByIdAndDelete(id)
-      .then((data) => {
+      .then(() => {
         return res.json({ message: `Company ${id} successfully deleted!` });
       })
       .catch((error) => {

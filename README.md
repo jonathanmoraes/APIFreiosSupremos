@@ -6,6 +6,10 @@ Esta é uma API RESTful que permite gerenciar usuários, empresas, unidades e at
 
 
 ## EndPoints
+```http
+  API apifreiossupremos-production.up.railway.app
+```
+
 
 ### Users
 
