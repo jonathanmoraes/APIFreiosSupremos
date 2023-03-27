@@ -25,7 +25,7 @@ Retorna informações detalhadas sobre um usuário específico.
 Cria um novo usuário com as informações fornecidas no corpo da requisição.
 
 ```http
-  PATCH /api/user/{id}
+  PUT /api/user/{id}
 ```
 Atualiza as informações de um usuário específico com as informações fornecidas no corpo da requisição.
 
@@ -52,7 +52,7 @@ Retorna informações detalhadas sobre uma empresa específica.
 Cria uma nova empresa com as informações fornecidas no corpo da requisição.
 
 ```http
-  PATCH /api/company/{id}
+  PUT /api/company/{id}
 ```
 Atualiza as informações de uma empresa específica com as informações fornecidas no corpo da requisição.
 
@@ -79,7 +79,7 @@ Retorna informações detalhadas sobre uma unidade específica.
 Cria uma nova unidade com as informações fornecidas no corpo da requisição.
 
 ```http
-  PATCH /api/unit/{id}
+  PUT /api/unit/{id}
 ```
 Atualiza as informações de uma unidade específica com as informações fornecidas no corpo da requisição.
 
@@ -106,7 +106,7 @@ Retorna informações detalhadas sobre um ativo específico.
 Cria um novo ativo com as informações fornecidas no corpo da requisição.
 
 ```http
-  PATCH /api/asset/{id}
+  PUT /api/asset/{id}
 ```
 Atualiza as informações de um ativo específico com as informações fornecidas no corpo da requisição.
 
@@ -119,7 +119,7 @@ Remove um ativo específico do sistema.
 ## Exemplos de requisições
 ## Companies
 ```http
-  POST or PATH /api/company
+  POST or PUT /api/company
 ```
 
 ```javascript
@@ -129,7 +129,7 @@ Remove um ativo específico do sistema.
 ```
 ## Users
 ```http
-  POST or PATH /api/user
+  POST or PUT /api/user
 ```
 
 ```javascript
@@ -140,7 +140,7 @@ Remove um ativo específico do sistema.
 ```
 ## Units
 ```http
-  POST or PATH /api/unit
+  POST or F /api/unit
 ```
 
 ```javascript
@@ -151,7 +151,7 @@ Remove um ativo específico do sistema.
 ```
 ## Assets
 ```http
-  POST or PATH /api/asset
+  POST or PUT /api/asset
 ```
 
 ```javascript

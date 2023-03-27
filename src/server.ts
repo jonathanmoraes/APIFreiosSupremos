@@ -4,11 +4,7 @@ import cors from "cors" ;
 import router from "./routes";
 require('dotenv').config()
 const app = express();
-const corsOptions: cors.CorsOptions = {
-      methods:"GET,POST,PUT,DELETE",
-      origin:"*"
-}
-app.use(cors(corsOptions))
+app.use(cors())
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 app.use(express.json());
