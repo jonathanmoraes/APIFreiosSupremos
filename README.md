@@ -116,9 +116,6 @@ Atualiza as informações de um ativo específico com as informações fornecida
 Remove um ativo específico do sistema.
 
 
-
-
-
 ## Exemplos de requisições
 ## Companies
 ```http
