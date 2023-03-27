@@ -4,9 +4,7 @@ import cors from "cors" ;
 import router from "./routes";
 require('dotenv').config()
 const app = express();
-app.use(cors({
-  origin: 'https://apifreiossupremos-production.up.railway.app/'
-}))
+app.use(cors())
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 app.use(express.json());
