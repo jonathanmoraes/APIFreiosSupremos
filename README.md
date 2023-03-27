@@ -144,7 +144,7 @@ Remove um ativo específico do sistema.
 ```
 ## Units
 ```http
-  POST or F /api/unit
+  POST or PUT /api/unit
 ```
 
 ```javascript
