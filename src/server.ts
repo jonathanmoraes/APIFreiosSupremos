@@ -7,6 +7,7 @@ const app = express();
 app.use(cors())
 const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
+const PORT = process.env.PORT
 app.use(express.json());
 app.use(router);
 
@@ -21,4 +22,4 @@ mongoose
     console.log("error in Db connection", err.message);
   });
 
-app.listen(3000);
+app.listen(PORT, () => console.log("listening on port" + PORT));
